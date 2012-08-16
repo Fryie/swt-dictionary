@@ -1,0 +1,1 @@
+root.'groovy.swt.SwtBuilder'.view = '*'
