@@ -9,6 +9,13 @@ application {
     //frameClass = 'javax.swing.JFrame'
 }
 mvcGroups {
+    // MVC Group for "entry"
+    'entry' {
+        model      = 'dictionary.EntryModel'
+        view       = 'dictionary.EntryView'
+        controller = 'dictionary.EntryController'
+    }
+
     // MVC Group for "dictionary"
     'dictionary' {
         model      = 'dictionary.DictionaryModel'
