@@ -3,5 +3,6 @@ package dictionary
 import groovy.beans.Bindable
 
 class DictionaryModel {
-   // @Bindable String propName
+	String name
+	List<EntryModel> entries = [new EntryModel(name:"test"),new EntryModel(name:"test2")]
 }

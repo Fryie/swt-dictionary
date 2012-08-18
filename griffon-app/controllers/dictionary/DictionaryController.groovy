@@ -4,9 +4,7 @@ import griffon.transform.Threading
 
 class DictionaryController {
     def view
+    def model
 
-    @Threading(Threading.Policy.SKIP)
-    def copyText = {
-        view.output.text = "[COPY] ${view.input.text}"
-    }
+    def test = {}
 }

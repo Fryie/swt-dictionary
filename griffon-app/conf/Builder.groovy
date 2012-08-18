@@ -1,1 +1,1 @@
-root.'groovy.swt.SwtBuilder'.view = '*'
+root.'groovy.jface.JFaceBuilder'.view = '*'
