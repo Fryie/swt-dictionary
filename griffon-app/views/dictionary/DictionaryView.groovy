@@ -1,11 +1,22 @@
 package dictionary
 
 import org.eclipse.swt.layout.GridData
+import org.eclipse.jface.viewers.IDoubleClickListener
+import org.eclipse.jface.viewers.DoubleClickEvent
 
-application(text: 'dictionary', location:[100, 100], size:[320, 240]) {
+application(text: 'dictionary', location:[100, 100]) {
     migLayout()
-    list() {
-    	listViewer(input: bind(model:model.entries,modelProperty:'name'))
+    list(layoutData:'west') {
+    	listViewer(input: bind(model:model.entries,modelProperty:'name')) {
+            //onEvent(type:"DoubleClick",closure:{ println it })
+        }
     }
-    label('Blah')
+    cTabFolder(id:'tabFolder',layoutData:'east') {
+    	cTabItem(text:"test") {
+    		label("blubb")
+    	}
+    	cTabItem(text:"testItem") {
+    		label("blibb")
+    	}
+    }
 }
