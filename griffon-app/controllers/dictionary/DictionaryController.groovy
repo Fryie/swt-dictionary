@@ -6,5 +6,11 @@ class DictionaryController {
     def view
     def model
 
-    def test = {}
+    def openEntry = { entryModel ->
+    	execInsideUISync {
+    		String mvcId = entryModel.name + System.currentTimeMillis()
+    		createMVCGroup('entry',mvcId,[model:entryModel,
+    			tabGroup:view.entryTabs])
+    	}
+    }
 }
