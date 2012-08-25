@@ -9,8 +9,9 @@ class DictionaryController {
     def openEntry = { entryModel ->
     	execInsideUISync {
     		String mvcId = entryModel.name + System.currentTimeMillis()
-    		createMVCGroup('entry',mvcId,[model:entryModel,
-    			tabGroup:view.entryTabs])
+    		def mvc = buildMVCGroup('entry',mvcId,[model:entryModel,
+    			tabGroup:view.entryTabs,mvcId:mvcId])
+    		view.entryTabs.selection = mvc.view.tab
     	}
     }
 }

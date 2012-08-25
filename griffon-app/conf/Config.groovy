@@ -5,9 +5,9 @@ log4j = {
         console name: 'stdout', layout: pattern(conversionPattern: '%d [%t] %-5p %c - %m%n')
     }
 
-    all  'org.codehaus.griffon'
+    warn  'org.codehaus.griffon'
 
-    all   'griffon.util',
+    error   'griffon.util',
            'griffon.core',
            'griffon.swt',
            'griffon.app'
