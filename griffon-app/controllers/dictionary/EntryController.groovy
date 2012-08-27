@@ -7,15 +7,14 @@ class EntryController {
     def view
 
     def save = {
-    	println "Name: ${model.name}"
-    	println "Translation: ${model.translation}"
-    	println "Categories: ${model.categories}"
-    	println "Notes: ${model.notes}"
-
         model.entry.name = model.name
         model.entry.translation = model.translation
         model.entry.categories = model.categories
         model.entry.notes = model.notes
+        execInsideUISync {
+            view.tab.text = model.name
+            app.mvcGroupManager.groups.dictionary.model.entries.add(model.entry)
+        }
     }
 
     def close = {

@@ -5,6 +5,5 @@ import org.eclipse.core.databinding.observable.list.WritableList
 
 @Bindable
 class DictionaryModel {
-	WritableList entries = new WritableList([new Entry(name:"test",translation:"test",
-		categories:"test",notes:"test")],Entry.class)
+	WritableList entries = new WritableList([],Entry.class)
 }
