@@ -3,7 +3,7 @@ package dictionary
 import org.eclipse.jface.viewers.IDoubleClickListener
 import org.eclipse.jface.viewers.DoubleClickEvent
 
-application(text: 'dictionary', location:[100, 100]) {
+application(text: 'dictionary', location:[100, 100], id:"mainShell") {
     fillLayout()
     sf = sashForm {
         migLayout(layoutConstraints:"fill")

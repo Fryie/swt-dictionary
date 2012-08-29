@@ -11,6 +11,8 @@ class EntryModel {
 
 	Entry entry
 
+	boolean isNew = false
+
 	EntryModel() {
 		name=""
 		translation=""
