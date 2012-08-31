@@ -11,7 +11,7 @@ class DictionaryController {
         EntryModel model = EntryModel.from(entry)
     	execInsideUISync {
     		def mvc = buildMVCGroup('entry',mvcId,
-                [model:model,tabGroup:view.entryTabs])
+                [model:model,tabGroup:view.entryTabs,mvcId:mvcId])
     		view.entryTabs.selection = mvc.view.tab
     	}
     }

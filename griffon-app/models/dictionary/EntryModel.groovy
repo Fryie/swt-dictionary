@@ -4,20 +4,18 @@ import groovy.beans.Bindable
 
 @Bindable
 class EntryModel {
-	String name
-	String translation
-	String categories
-	String notes
+	String name = ""
+	String translation = ""
+	String categories = ""
+	String notes = ""
+
+	String mvcId = ""
 
 	Entry entry
 
 	boolean isNew = false
 
 	EntryModel() {
-		name=""
-		translation=""
-		categories=""
-		notes=""
 		entry=new Entry(name:"",translation:"",categories:"",notes:"")
 	}
 

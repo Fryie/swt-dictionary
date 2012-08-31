@@ -9,6 +9,10 @@ class EntryController {
 	def model
     def view
 
+    void mvcGroupInit(Map args) {
+        model.mvcId = args.mvcId
+    }
+
     def save = {
         model.entry.name = model.name
         model.entry.translation = model.translation
@@ -40,7 +44,10 @@ class EntryController {
     }
 
     def close = {
-    	//TODO
+        execInsideUISync {
+            view.tab.dispose()
+            destroyMVCGroup(model.mvcId)
+        }
     }
 
     String selectSaveFile() {
@@ -49,7 +56,6 @@ class EntryController {
             def dialog = new FileDialog(app.mvcGroupManager.groups.dictionary.view.mainShell, 
                 SWT.SAVE)
             file = dialog.open()
-            println file
         }
         return file
     }
