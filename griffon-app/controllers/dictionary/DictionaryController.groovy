@@ -35,4 +35,17 @@ class DictionaryController {
             model.openEntries[mvc.model.entry] = mvc
         }
     }
+
+    def deleteEntries = { entries ->
+        entries.each { entry ->
+            execInsideUISync {
+                // if already open, call close action
+                if (model.openEntries.containsKey(entry)) {
+                    model.openEntries[entry].controller.close()
+                }
+                model.entries.remove(entry)
+            }
+        }
+        // TODO: call save external
+    }
 }

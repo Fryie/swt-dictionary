@@ -29,8 +29,7 @@ application(text: 'dictionary', location:[100, 100], id:"mainShell") {
     		    })
                 lv.addSelectionChangedListener(new ISelectionChangedListener(){
                     void selectionChanged(SelectionChangedEvent evt) {
-                        println evt.selection
-                        //setSelection(evt.selection)
+                        setSelection(evt.selection.toList())
                     }
                 })
             }
@@ -38,7 +37,7 @@ application(text: 'dictionary', location:[100, 100], id:"mainShell") {
                 onEvent(type:"Selection") { controller.newEntry() }
             }
             button(text:"Delete selected",layoutData:"growx") {
-                onEvent(type:"Selection") { evt -> println evt.widget }
+                onEvent(type:"Selection") { controller.deleteEntries(model.selectedEntries) }
             }
         }
         cTabFolder(id:'entryTabs',simple:false)
@@ -48,4 +47,8 @@ application(text: 'dictionary', location:[100, 100], id:"mainShell") {
 
 def openEntry(entryModel) {
     controller.openEntry(entryModel)
+}
+
+def setSelection(selection) {
+    model.selectedEntries = selection
 }
