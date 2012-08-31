@@ -45,8 +45,12 @@ class EntryController {
 
     def close = {
         execInsideUISync {
+            // close tab
             view.tab.dispose()
+            // destroy mvc group
             destroyMVCGroup(model.mvcId)
+            // remove from 'open entries'
+            app.mvcGroupManager.groups.dictionary.model.openEntries.remove(model.entry)
         }
     }
 

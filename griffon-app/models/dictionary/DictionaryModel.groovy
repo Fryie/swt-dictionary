@@ -7,6 +7,8 @@ import java.util.prefs.Preferences
 @Bindable
 class DictionaryModel {
 	WritableList entries = new WritableList([],Entry.class)
+	Map<Entry,EntryModel> openEntries = [:]
+	List selectedEntries = []
 
 	Preferences prefs = Preferences.userNodeForPackage(this.class)
 }
