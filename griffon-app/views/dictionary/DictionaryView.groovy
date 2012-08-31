@@ -2,6 +2,8 @@ package dictionary
 
 import org.eclipse.jface.viewers.IDoubleClickListener
 import org.eclipse.jface.viewers.DoubleClickEvent
+import org.eclipse.swt.custom.CTabFolder2Adapter
+import org.eclipse.swt.custom.CTabFolderEvent
 
 application(text: 'dictionary', location:[100, 100], id:"mainShell") {
     fillLayout()
@@ -21,7 +23,7 @@ application(text: 'dictionary', location:[100, 100], id:"mainShell") {
                 onEvent(type:"Selection") { controller.newEntry() }
             }
         }
-        cTabFolder(id:'entryTabs',style:"close",simple:false)
+        cTabFolder(id:'entryTabs',simple:false)
     }
     sf.weights=[20,80]
 }

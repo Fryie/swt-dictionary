@@ -1,6 +1,6 @@
 package dictionary
 
-cTabItem(tabGroup,text:"  "+model.name+"  ",id:"tab") {
+tab = cTabItem(tabGroup,text:"  "+model.name+"  ",id:"tab") {
 	composite {
 		migLayout(layoutConstraints:"wrap 2",columnConstraints:"[]rel[grow]")
 		label(text:"Name:")
