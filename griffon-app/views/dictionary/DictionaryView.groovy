@@ -10,15 +10,18 @@ application(text: 'dictionary', location:[100, 100], id:"mainShell") {
     menu(style:"bar") {
         menuItem(text:"&File",style:"cascade") {
             menu(style:"drop_down") {
+                menuItem(style:"push", text:"New dictionary") {
+                    onEvent(type:"Selection") { controller.newDictionary() }
+                }
                 menuItem(style:"push", text:"Open dictionary") {
-                    onEvent(type:"Selection") { println 'o.d.'}
+                    onEvent(type:"Selection") { controller.openFile() }
                 }
             }
         }
     }
     sf = sashForm {
         migLayout(layoutConstraints:"fill")
-        composite {
+        composite() {
             migLayout()
             list(style:"multi",layoutData:"grow,wrap,h 80%") {
     	       lv = listViewer(input: bind(model:model.entries,modelProperty:'name'))
@@ -26,12 +29,12 @@ application(text: 'dictionary', location:[100, 100], id:"mainShell") {
     		        void doubleClick(DoubleClickEvent evt) {
     				    openEntry(evt.selection.getFirstElement())
     			    }
-    		    })
-                lv.addSelectionChangedListener(new ISelectionChangedListener(){
+    		   })
+               lv.addSelectionChangedListener(new ISelectionChangedListener(){
                     void selectionChanged(SelectionChangedEvent evt) {
                         setSelection(evt.selection.toList())
                     }
-                })
+               })
             }
             button(text:"New Entry",layoutData:"growx,wrap") {
                 onEvent(type:"Selection") { controller.newEntry() }
@@ -42,7 +45,7 @@ application(text: 'dictionary', location:[100, 100], id:"mainShell") {
         }
         cTabFolder(id:'entryTabs',simple:false)
     }
-    sf.weights=[20,80]
+    sf.weights=[15,85]
 }
 
 def openEntry(entryModel) {

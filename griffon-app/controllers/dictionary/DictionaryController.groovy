@@ -1,6 +1,11 @@
 package dictionary
 
 import griffon.transform.Threading
+import org.eclipse.swt.widgets.FileDialog
+import org.eclipse.swt.SWT
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+import org.eclipse.core.databinding.observable.list.WritableList
 
 class DictionaryController {
     def view
@@ -46,6 +51,70 @@ class DictionaryController {
                 model.entries.remove(entry)
             }
         }
-        // TODO: call save external
+        saveToFile()
+    }
+
+    def saveToFile = {
+        def entries = model.entries
+        def file = model.prefs.get("SAVE_FILE","")
+        if (file=="") {
+            file = selectFile(SWT.SAVE)
+            if (file==null) {
+                return
+            }
+            model.prefs.put("SAVE_FILE",file)
+        }
+
+        execInsideUISync {
+            new File(file).withWriter { out ->
+                out.write(JsonOutput.toJson(entries.wrappedList))
+            }
+        }
+    }
+
+    def newDictionary = {
+        execInsideUISync {
+            model.openEntries.each { k, v ->
+                v.controller.close()
+            }
+            model.openEntries.clear()
+            model.entries.clear()
+        }
+        model.prefs.remove("SAVE_FILE")
+    }
+
+    def openFile = {
+        def file = selectFile(SWT.OPEN)
+        if (file!=null) {
+            model.prefs.put("SAVE_FILE",file)
+            load(new File(file))
+        }
+    }
+
+    def loadDefault = {
+        def file = new File(model.prefs.get("SAVE_FILE",""))
+        load(file)
+    }
+
+    void load(file) {
+        if (file.exists()) {
+            def readEntries = new JsonSlurper().parseText(file.text)
+            execInsideUISync {
+                model.entries.clear()
+                readEntries.each {
+                    model.entries.add(new Entry(name:it.name,translation:it.translation,
+                        categories:it.categories,notes:it.notes))
+                }
+            }
+        }
+    }
+
+    String selectFile(mode) {
+        def file
+        execInsideUISync {
+            def dialog = new FileDialog(view.mainShell, mode)
+            file = dialog.open()
+        }
+        return file
     }
 }
